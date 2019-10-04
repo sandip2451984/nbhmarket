@@ -1,0 +1,52 @@
+# To get started with security, check out the documentation:
+# https://symfony.com/doc/current/security.html
+security:
+
+    # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
+    providers:
+        #in_memory:
+            #memory: ~
+        the_user_provider:
+            entity: 
+                class: AppBundle\Entity\User
+                property: email
+
+    encoders:
+        AppBundle\Entity\User:
+            algorithm: bcrypt
+
+    firewalls:
+        # disables authentication for assets and the profiler, adapt it according to your needs
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        main:
+            anonymous: ~
+            # activate different ways to authenticate
+
+            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
+            #http_basic: ~
+
+            # https://symfony.com/doc/current/security/form_login_setup.html
+            form_login:
+                login_path: login
+                check_path: login
+                csrf_token_generator: security.csrf.token_manager
+                always_use_default_target_path: true
+                default_target_path:            /login/redirect
+                #target_path_parameter:          _target_path
+                #use_referer:                    false
+                username_parameter: email
+                password_parameter: _password
+                provider: the_user_provider
+            logout:
+                path:   app_logout
+
+    access_control:
+        - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: '^/admin/users', roles: ROLE_SUPER_ADMIN }
+        - { path: '^/admin', roles: ROLE_ADMIN }
+        - { path: '^/dashboard', roles: [ROLE_USER, ROLE_ADMIN, ROLE_SUPER_ADMIN] }
+        - { path: '^/', roles: [ROLE_USER, ROLE_ADMIN, ROLE_SUPER_ADMIN] }

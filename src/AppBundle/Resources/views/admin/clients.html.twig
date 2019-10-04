@@ -1,0 +1,57 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block body %}
+    
+    <div class="panel panel-default mt-5">
+        <div class="panel-heading"><h3>Clients</h3></div>
+    
+        <div class="panel-body">
+            <table class="table">
+                <tr>
+                    <td>Name</td>
+                    <td>{{app.user.name}}</td>
+                </tr>
+                <tr>
+                    <td>Surname</td>
+                    <td>{{app.user.surname}}</td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>{{app.user.email}}</td>
+                </tr>
+                <tr>
+                    <td>Date of Birth</td>
+                    <td>{{app.user.dateOfBirth|date("m/d/Y")}}</td>
+                </tr>
+                <tr>
+                    <td>Phone number</td>
+                    <td>{{app.user.phoneNumber}}</td>
+                </tr>
+                <tr>
+                    <td>Address</td>
+                    <td>{{app.user.address}}</td>
+                </tr>
+                <tr>
+                    <td>Country</td>
+                    <td>{{app.user.country}}</td>
+                </tr>
+                <tr>
+                    <td>Trading Account Number</td>
+                    <td>{{app.user.tradingAccountNumber}}</td>
+                </tr>
+                <tr>
+                    <td>Balance</td>
+                    <td>{{app.user.balance}}</td>
+                </tr>
+                <tr>
+                    <td>Open Trades</td>
+                    <td>{{app.user.openTrades}}</td>
+                </tr>
+                <tr>
+                    <td>Close Trades</td>
+                    <td>{{app.user.closeTrades}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+{% endblock %}

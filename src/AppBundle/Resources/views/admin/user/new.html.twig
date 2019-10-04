@@ -1,0 +1,9 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block body %}
+    <h1>Create new User</h1>
+
+    {{ include('@App/admin/user/_form.html.twig') }}
+
+    <a href="{{ path('user_index') }}">back to list</a>
+{% endblock %}
